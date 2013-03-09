@@ -2,6 +2,10 @@ module BlackSwan
   module Config
     extend self
 
+    def database_url
+      @database_url ||= ENV["DATABASE_URL"] || raise("missing=DATABASE_URL")
+    end
+
     def force_ssl?
       @force_ssl ||= %w{1 true yes}.include?(ENV["FORCE_SSL"])
     end
@@ -18,6 +22,11 @@ module BlackSwan
 
     def root
       @root ||= File.expand_path("../../../", __FILE__)
+    end
+
+    def twitter_handle
+      @twitter_handle ||= ENV["TWITTER_HANDLE"] ||
+        raise("missing=TWITTER_HANDLE")
     end
   end
 end

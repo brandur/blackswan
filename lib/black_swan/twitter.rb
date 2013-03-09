@@ -7,6 +7,7 @@ module BlackSwan
     end
 
     get "/twitter" do
+      @title = "Twitter"
       slim :twitter
     end
   end
