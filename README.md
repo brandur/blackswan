@@ -3,6 +3,8 @@ README
 
 A project designed to provide personal data ownership and display.
 
+See an example at https://brandur-org-black-swan.herokuapp.com.
+
 ## Deploy
 
 Local:
