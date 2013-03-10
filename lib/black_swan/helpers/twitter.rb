@@ -22,11 +22,11 @@ module BlackSwan::Helpers
 
       # user links (like @brandur)
       html.gsub! /@(\w+)/,
-        '<a href="http://www.twitter.com/\1" rel="nofollow">@\1</a>'
+        '<a href="https://www.twitter.com/\1" rel="nofollow">@\1</a>'
 
       # hash tag search (like #mix11)
       html.gsub! /#(\w+)/,
-        '<a href="http://search.twitter.com/search?q=\1" rel="nofollow">#\1</a>'
+        '<a href="https://search.twitter.com/search?q=\1" rel="nofollow">#\1</a>'
 
       # replace links generated earlier
       tag_map.each do |tag, replacement|
