@@ -11,4 +11,6 @@ require_relative "../lib/black_swan"
 DB = Sequel.connect(BlackSwan::Config.database_url)
 
 # all spiders
-BlackSwan::Spiders::Twitter.new.run
+Timeout.timeout(60) do
+  BlackSwan::Spiders::Twitter.new.run
+end
