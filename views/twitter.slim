@@ -1,7 +1,10 @@
 .row
   .col_12.last
     h1 Twitter
-    p #{number_with_delimiter(@tweet_count)} tweets, and #{number_with_delimiter(@tweet_count_with_replies)} including replies.
+    - if params[:with_replies] != "true"
+      p #{number_with_delimiter(@tweet_count)} tweets, and <a href="/twitter?with_replies=true">#{number_with_delimiter(@tweet_count_with_replies)} including replies</a>.
+    - else
+      p <a href="/twitter">#{number_with_delimiter(@tweet_count)} tweets</a>, and #{number_with_delimiter(@tweet_count_with_replies)} including replies.
     == render :slim, :"charts/_twitter", layout: false
 .row
   #sections.col_1
