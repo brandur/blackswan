@@ -1,5 +1,5 @@
-README
-======
+Black Swan
+==========
 
 A project designed to provide personal data ownership and display.
 
