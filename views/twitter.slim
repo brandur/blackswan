@@ -1,1 +1,29 @@
-| Hello!
+.row
+  .col_12.last
+    h1 Twitter
+    == render :slim, :"charts/_twitter", layout: false
+.row
+  #sections.col_1
+    ul
+      - @tweets_by_year_and_month.each do |year, tweets_by_month|
+        li
+          a href="#year_#{year}"= year
+          ul
+            - tweets_by_month.each do |month, tweet|
+              li
+                a href="#month_#{year}_#{month}"= month_name(month)
+  #tweets.col_11.last
+    - @tweets_by_year_and_month.each do |year, tweets_by_month|
+      h2 id="year_#{year}"= year
+      .twitter_year
+        - tweets_by_month.each do |month, tweets|
+          / no top margin for the first month in each year
+          - extra = month == tweets_by_month.keys.first ? 'top' : ''
+          h3 id="month_#{year}_#{month}" class="#{extra}"= month_name(month)
+          ul
+            - tweets.each do |tweet|
+              li
+                == content_to_html(tweet[:content])
+                |  
+                span.meta
+                  a href="https://twitter.com/#{BlackSwan::Config.twitter_handle}/statuses/#{tweet[:slug]}"= tweet[:occurred_at].getlocal.strftime('%b %e, %Y %H:%M')

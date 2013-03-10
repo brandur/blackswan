@@ -7,6 +7,7 @@ Bundler.require
 
 require_relative "../lib/black_swan"
 
+# initialization/configuration
 DB = Sequel.connect(BlackSwan::Config.database_url)
 
 # all spiders

@@ -1,0 +1,30 @@
+.chart#twitter-chart
+
+javascript:
+  var tweetCountByMonthCategories = [ #{@tweet_count_by_month.map{|k, v| "'#{k.strftime("%b \\'%y")}'"}.join(', ')} ];
+  var tweetCountByMonthData       = [ #{@tweet_count_by_month.map{|k, v| v}.join(', ')} ];
+
+coffee:
+  $ ->
+     chart = new Highcharts.Chart
+        chart:
+          renderTo: 'twitter-chart'
+          defaultSeriesType: 'line'
+        title:
+          text: 'Tweets by Month'
+        xAxis:
+          categories: tweetCountByMonthCategories
+          labels:
+            rotation: -45
+            align: 'right'
+            step: 1
+        yAxis:
+          min: 0
+          title:
+            text: null
+        tooltip:
+          formatter: ->
+            this.y + (if this.y != 1 then ' tweets' else ' tweet') + ' in ' + this.x
+        series: [
+          { name: 'Tweets', data: tweetCountByMonthData }
+        ]

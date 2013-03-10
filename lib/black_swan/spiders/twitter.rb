@@ -53,9 +53,7 @@ module BlackSwan::Spiders
           occurred_at: event["created_at"],
           slug:        event["id"].to_s,
           metadata: {
-            mention:   (event["text"] =~ /^\s*@/) != nil,
-            permalink: "https://twitter.com/#{BlackSwan::Config.twitter_handle}" +
-              "/statuses/#{event["id"]}",
+            reply:     (event["text"] =~ /^\s*@/) != nil,
           }.hstore)
       end
 

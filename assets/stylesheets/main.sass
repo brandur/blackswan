@@ -1,0 +1,114 @@
+$blue: #4477aa
+
+$light: #bbb
+
+@mixin columns($count, $width, $gap)
+  column-count: $count
+  column-width: $width
+  column-gap: $gap
+  -moz-column-count: $count
+  -moz-column-width: $width
+  -moz-column-gap: $gap
+  -webkit-column-count: $count
+  -webkit-column-width: $width
+  -webkit-column-gap: $gap
+
+a, a:visited, a:hover
+  color: $blue
+  text-decoration: none
+
+a:hover
+  text-decoration: underline
+
+body
+  color: #000
+  background: #fff
+  font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-size: 14px
+  font-weight: 300
+  line-height: 1.6em
+  margin: 40px 80px
+
+em
+  font-style: italic
+
+h1, h2, h3
+  font-family: 'Raleway', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-weight: 300
+  line-height: 1.2em
+  margin: 40px 0
+
+h1
+  font-size: 80px
+
+h2
+  font-size: 34px
+
+h3
+  font-size: 20px
+  margin: 20px 0
+
+strong
+  color: $blue
+  font-weight: bold
+
+ul
+  list-style-type: disc
+  padding: 0 0 0 30px
+
+  li
+    padding: 0 0 0 2px
+
+#content
+
+  .chart
+    height: 200px
+    overflow: hidden
+    width: 100%
+
+  #sections
+
+    ul
+      color: $light
+      font-size: 15px
+      list-style-type: none
+      margin: 26px 0
+      padding: 0
+
+      li
+        margin: 6px 0
+
+        ul
+          color: $light
+          font-size: 12px
+          line-height: 1em
+          list-style-type: none
+          margin: 6px 0
+          padding: 0 0 0 6px
+
+          li
+            margin: 8px 0
+
+            a, a:visited, a:hover
+              color: $light
+
+  #tweets
+
+    .twitter_year
+      @include columns(auto, 300px, 30px)
+
+      ul
+        margin: 0
+
+      .meta
+        color: $light
+        font-size: 12px
+
+        a, a:visited, a:hover
+          color: $light
+
+        a:hover
+          text-decoration: underline
+
+      .top
+        margin-top: 0
