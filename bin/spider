@@ -10,10 +10,9 @@ require_relative "../lib/black_swan"
 # initialization/configuration
 DB = Sequel.connect(BlackSwan::Config.database_url)
 
-spiders = [
-  BlackSwan::Spiders::Goodreads,
-  BlackSwan::Spiders::Twitter,
-]
+spiders = []
+spiders << BlackSwan::Spiders::Goodreads if ENV["GOODREADS_ID"]
+spiders << BlackSwan::Spiders::Twitter   if ENV["TWITTER_HANDLE"]
 
 spiders.each do |spider|
   Timeout.timeout(60) do
