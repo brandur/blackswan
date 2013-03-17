@@ -10,11 +10,13 @@ module BlackSwan
     get "/twitter" do
       @title = "Twitter"
 
-      @tweet_count              = DB[:events].
-        filter("metadata -> 'reply' = 'false'").count
-      @tweet_count_with_replies = DB[:events].count
+      @twitter_events = DB[:events].filter(type: "twitter")
 
-      @tweets = DB[:events].reverse_order(:occurred_at)
+      @tweet_count              = @twitter_events.
+        filter("metadata -> 'reply' = 'false'").count
+      @tweet_count_with_replies = @twitter_events.count
+
+      @tweets = @twitter_events.reverse_order(:occurred_at)
       @tweets = @tweets.filter("metadata -> 'reply' = 'false'") \
         if params[:with_replies] != "true"
       @tweets = @tweets.all
