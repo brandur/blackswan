@@ -30,6 +30,6 @@
                 == content_to_html(tweet[:content])
                 |  
                 span.meta
-                  a href="https://twitter.com/#{BlackSwan::Config.twitter_handle}/statuses/#{tweet[:slug]}"
+                  a href="https://twitter.com/#{ENV["TWITTER_HANDLE"]}/statuses/#{tweet[:slug]}"
                     - display = distance_of_time_in_words(tweet[:occurred_at])
                     = display ? "#{display} ago" : tweet[:occurred_at].getlocal.strftime('%b %e, %Y %H:%M')
