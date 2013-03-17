@@ -23,10 +23,5 @@ module BlackSwan
     def root
       @root ||= File.expand_path("../../../", __FILE__)
     end
-
-    def twitter_handle
-      @twitter_handle ||= ENV["TWITTER_HANDLE"] ||
-        raise("missing=TWITTER_HANDLE")
-    end
   end
 end

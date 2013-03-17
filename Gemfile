@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "coffee-script"
 gem "excon"
+gem 'libxml-ruby'
 gem "multi_json"
 gem "pg"
 gem "puma"

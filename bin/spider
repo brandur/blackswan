@@ -10,7 +10,14 @@ require_relative "../lib/black_swan"
 # initialization/configuration
 DB = Sequel.connect(BlackSwan::Config.database_url)
 
-# all spiders
-Timeout.timeout(60) do
-  BlackSwan::Spiders::Twitter.new.run
+spiders = [
+  BlackSwan::Spiders::Goodreads,
+  BlackSwan::Spiders::Twitter,
+]
+
+spiders.each do |spider|
+  Timeout.timeout(60) do
+    puts "running=#{spider.name}"
+    spider.new.run
+  end
 end

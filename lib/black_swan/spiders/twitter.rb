@@ -1,6 +1,7 @@
 module BlackSwan::Spiders
   class Twitter
     def run
+      check_config!
       update
       backfill
     end
@@ -9,12 +10,16 @@ module BlackSwan::Spiders
 
     def backfill
       puts "backfilling"
-      earliest = DB[:events].min("slug::bigint".lit)
+      earliest = DB[:events].filter(type: "twitter").min("slug::bigint".lit)
       begin
         new, events = process_page(max_id: earliest)
         puts "processed=#{new} earliest=#{earliest}"
         earliest = events.count > 0 ? events.min_by { |e| e["id"] }["id"] : nil
       end while new > 0
+    end
+
+    def check_config!
+      raise("missing=TWITTER_HANDLE") unless ENV["TWITTER_HANDLE"]
     end
 
     def expand_urls(event)
@@ -39,19 +44,21 @@ module BlackSwan::Spiders
           count:            200,
           include_entities: "true",
           max_id:           options[:max_id],
-          screen_name:      BlackSwan::Config.twitter_handle,
+          screen_name:      ENV["TWITTER_HANDLE"],
           since_id:         options[:since_id],
           trim_user:        "true",
         }.reject { |k, v| v == nil })
       events = MultiJson.decode(res.body)
       events.each do |event|
-        next if DB[:events].first(slug: event["id"].to_s) != nil
+        next if \
+          DB[:events].first(slug: event["id"].to_s, type: "twitter") != nil
         new += 1
 
         DB[:events].insert(
           content:     expand_urls(event),
           occurred_at: event["created_at"],
           slug:        event["id"].to_s,
+          type:        "twitter",
           metadata: {
             reply:     (event["text"] =~ /^\s*@/) != nil,
           }.hstore)
@@ -62,7 +69,7 @@ module BlackSwan::Spiders
 
     def update
       puts "updating"
-      latest = DB[:events].max("slug::bigint".lit)
+      latest = DB[:events].filter(type: "twitter").max("slug::bigint".lit)
       begin
         new, events = process_page(since_id: latest)
         puts "processed=#{new} latest=#{latest}"
