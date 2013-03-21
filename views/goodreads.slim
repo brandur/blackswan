@@ -20,16 +20,16 @@
       h2 id="year_#{year}"= year
       .goodreads_year
         ul
-          - books.each do |b|
+          - books.each do |book|
             li
               em
-                a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{b[:slug]}"= b[:metadata][:title]
-              |  by #{b[:metadata][:author]}
+                a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{book[:slug]}"= book[:metadata][:title]
+              |  by #{book[:metadata][:author]}
               = ' '
               span.meta 
-                | #{b[:metadata][:num_pages]} pages; 
+                | #{book[:metadata][:num_pages]} pages; 
                 | ISBN13: 
-                a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{b[:slug]}"= format_isbn13(b[:slug])
+                a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{book[:slug]}"= format_isbn13(book[:slug])
                 | ; 
-                - display = distance_of_time_in_words(b[:occurred_at])
-                = display ? "finished #{display} ago" : b[:occurred_at].getlocal.strftime('%b %e, %Y %H:%M')
+                - display = distance_of_time_in_words(book[:occurred_at])
+                = display ? "finished #{display} ago" : book[:occurred_at].getlocal.strftime('%b %e, %Y %H:%M')
