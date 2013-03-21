@@ -14,6 +14,8 @@ module BlackSwan
       @books = DB[:events].filter(type: "goodreads").
         reverse_order(:occurred_at)
 
+      last_modified(@books.first[:occurred_at])
+
       @books_count   = @books.count
       @books_by_year = @books.all.group_by { |b| b[:occurred_at].year }
 

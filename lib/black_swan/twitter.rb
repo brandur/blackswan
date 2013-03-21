@@ -14,6 +14,8 @@ module BlackSwan
       @tweets = DB[:events].filter(type: "twitter").
         reverse_order(:occurred_at)
 
+      last_modified(@tweets.first[:occurred_at])
+
       @tweet_count              = @tweets.
         filter("metadata -> 'reply' = 'false'").count
       @tweet_count_with_replies = @tweets.count
