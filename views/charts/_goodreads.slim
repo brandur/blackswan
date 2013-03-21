@@ -1,0 +1,32 @@
+.chart#goodreads-chart
+
+javascript:
+  var bookCountByYearCategories = [#{@book_count_by_year.map { |k, v| k.strftime('%Y') }.map{ |d| "'#{d}'" }.join(', ')}];
+  var bookCountByYearData       = [#{@book_count_by_year.map { |k, v| v }.join(', ')}];
+
+coffee:
+  $ ->
+    chart = new Highcharts.Chart
+      chart:
+        renderTo: 'goodreads-chart'
+        defaultSeriesType: 'bar'
+      title:
+        text: 'Number of Books Read by Year'
+      xAxis:
+        categories: bookCountByYearCategories
+        title:
+          text: null
+      yAxis:
+        min: 0
+        title:
+          text: null
+      tooltip:
+        formatter: ->
+          this.y + (if this.y != 1 then ' books read' else ' book read') + ' in ' + this.x
+      plotOptions:
+        bar:
+          dataLabels:
+            enabled: true
+      series: [
+        { name: 'Books read', data: bookCountByYearData }
+      ]

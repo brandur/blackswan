@@ -1,5 +1,6 @@
 module BlackSwan
   class Twitter < Sinatra::Base
+    helpers Helpers::Common
     helpers Helpers::Twitter
     register ErrorHandling
 
@@ -10,18 +11,18 @@ module BlackSwan
     get "/twitter" do
       @title = "Twitter"
 
-      @twitter_events = DB[:events].filter(type: "twitter")
+      @tweets = DB[:events].filter(type: "twitter").
+        reverse_order(:occurred_at)
 
-      @tweet_count              = @twitter_events.
+      @tweet_count              = @tweets.
         filter("metadata -> 'reply' = 'false'").count
-      @tweet_count_with_replies = @twitter_events.count
+      @tweet_count_with_replies = @tweets.count
 
-      @tweets = @twitter_events.reverse_order(:occurred_at)
       @tweets = @tweets.filter("metadata -> 'reply' = 'false'") \
         if params[:with_replies] != "true"
       @tweets = @tweets.all
 
-      @tweets_by_year  = @tweets.group_by { |t| t[:occurred_at].year }
+      @tweets_by_year = @tweets.group_by { |t| t[:occurred_at].year }
       @tweets_by_year_and_month = @tweets_by_year.merge(@tweets_by_year) { |y, ts|
         ts.group_by { |t| t[:occurred_at].month }
       }

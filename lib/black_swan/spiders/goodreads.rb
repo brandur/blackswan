@@ -23,6 +23,7 @@ module BlackSwan::Spiders
           key:      ENV["GOODREADS_KEY"],
           page:     options[:page],
           per_page: 20,
+          shelf:    "read",
           sort:     "date_read",
           v:        "2",
         })

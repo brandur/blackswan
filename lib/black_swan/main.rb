@@ -4,8 +4,9 @@ module BlackSwan
     use Rack::SSL if Config.force_ssl?
     run Sinatra::Router.new {
       mount Assets
-      mount Twitter
-      run   Default # index + error handlers
+      mount Goodreads  # /books
+      mount Twitter    # /twitter
+      run   Default    # / + error handlers
     }
   end
 end

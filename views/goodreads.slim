@@ -1,0 +1,35 @@
+.row
+  .col_12.last
+    h1 Books
+    p #{number_with_delimiter(@books_count)} books.
+
+.row
+  .col_6
+    == render :slim, :"charts/_goodreads", layout: false
+  .col_6.last
+    == render :slim, :"charts/_goodreads_num_pages", layout: false
+
+.row
+  #sections.col_1
+    ul
+      - @books_by_year.each do |year, books|
+          li
+            a href="#year_#{year}"= year
+  #goodreads.col_11.last
+    - @books_by_year.each do |year, books|
+      h2 id="year_#{year}"= year
+      .goodreads_year
+        ul
+          - books.each do |b|
+            li
+              em
+                a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{b[:slug]}"= b[:metadata][:title]
+              |  by #{b[:metadata][:author]}
+              = ' '
+              span.meta 
+                | #{b[:metadata][:num_pages]} pages; 
+                | ISBN13: 
+                a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{b[:slug]}"= format_isbn13(b[:slug])
+                | ; 
+                - display = distance_of_time_in_words(b[:occurred_at])
+                = display ? "finished #{display} ago" : b[:occurred_at].getlocal.strftime('%b %e, %Y %H:%M')

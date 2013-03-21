@@ -1,0 +1,32 @@
+.chart#goodreads-chart-num-pages
+
+javascript:
+  var pageCountByYearCategories = [#{@page_count_by_year.map{ |k, v| k.strftime('%Y') }.map{ |d| "'#{d}'" }.join(', ')}];
+  var pageCountByYearData       = [#{@page_count_by_year.map{ |k, v| v }.join(', ')}];
+
+coffee:
+  $ ->
+    chart = new Highcharts.Chart
+      chart:
+        renderTo: 'goodreads-chart-num-pages'
+        defaultSeriesType: 'bar'
+      title:
+        text: 'Number of Pages Read by Year'
+      xAxis:
+        categories: pageCountByYearCategories
+        title:
+          text: null
+      yAxis:
+        min: 0
+        title:
+          text: null
+      tooltip:
+        formatter: ->
+          this.y + (if this.y != 1 then ' pages read' else ' page read') + ' in ' + this.x
+      plotOptions:
+        bar:
+          dataLabels:
+            enabled: true
+      series: [
+        { name: 'Pages read', data: pageCountByYearData }
+      ]
