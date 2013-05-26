@@ -4,6 +4,7 @@ require_relative "black_swan/error_handling"
 require_relative "black_swan/helpers/common"
 require_relative "black_swan/helpers/goodreads"
 require_relative "black_swan/helpers/twitter"
+require_relative "black_swan/spiders/blog"
 require_relative "black_swan/spiders/goodreads"
 require_relative "black_swan/spiders/twitter"
 

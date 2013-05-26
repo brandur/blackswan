@@ -11,6 +11,7 @@ require_relative "../lib/black_swan"
 DB = Sequel.connect(BlackSwan::Config.database_url)
 
 spiders = []
+spiders << BlackSwan::Spiders::Blog      if ENV["BLOG_URL"]
 spiders << BlackSwan::Spiders::Goodreads if ENV["GOODREADS_ID"]
 spiders << BlackSwan::Spiders::Twitter   if ENV["TWITTER_HANDLE"]
 
