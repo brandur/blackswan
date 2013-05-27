@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+# kill deprecation warnings for a clean console boot
+$VERBOSE = nil
+
+require "irb"
+require "irb/completion"
+
+require "bundler/setup"
+Bundler.require
+
+require_relative "../lib/black_swan"
+include BlackSwan
+
+DB = Sequel.connect(BlackSwan::Config.database_url)
+
+IRB.start
