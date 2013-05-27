@@ -12,8 +12,10 @@ module BlackSwan::Helpers
 
         # replace with tags so links don't interfere with subsequent rules
         tag = Digest::SHA1.hexdigest($2)
-        tag_map[tag] = %{#{$1}<a href="#{$2}" rel="nofollow">#{display}</a>}
-        tag
+        tag_map[tag] = %{<a href="#{$2}" rel="nofollow">#{display}</a>}
+
+        # make sure to preserve whitespace before the inserted tag
+        "#{$1}#{tag}"
       end
 
       # links like www.link.com or ftp.link.com
