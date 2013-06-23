@@ -19,6 +19,7 @@ module BlackSwan::Spiders
     end
 
     def check_config!
+      raise("missing=TWITTER_ACCESS_TOKEN") unless ENV["TWITTER_ACCESS_TOKEN"]
       raise("missing=TWITTER_HANDLE") unless ENV["TWITTER_HANDLE"]
     end
 
@@ -38,8 +39,11 @@ module BlackSwan::Spiders
     def process_page(options={})
       new = 0
       res = Excon.get(
-        "https://api.twitter.com/1/statuses/user_timeline.json",
+        "https://api.twitter.com/1.1/statuses/user_timeline.json",
         expects: 200,
+        headers: {
+          "Authorization" => "Bearer #{ENV["TWITTER_ACCESS_TOKEN"]}"
+        },
         query: {
           count:            200,
           include_entities: "true",

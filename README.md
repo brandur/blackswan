@@ -25,7 +25,7 @@ git push heroku master
 heroku run sequel -m db/migrate \$DATABASE_URL
 heroku config:add FORCE_SSL=true
 heroku config:add GOODREADS_ID=1234 GOODREADS_KEY=abcd
-heroku config:add TWITTER_HANDLE=brandur
+heroku config:add TWITTER_HANDLE=brandur TWITTER_ACCESS_TOKEN=abcd
 heroku run bin/spider
 heroku open
 ```
