@@ -13,7 +13,7 @@ module BlackSwan
     end
 
     get "/reading" do
-      @title = "Books"
+      @title = "Reading"
 
       @books = DB[:events].filter(type: "goodreads").
         reverse_order(:occurred_at)
