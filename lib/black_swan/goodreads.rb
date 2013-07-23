@@ -9,6 +9,10 @@ module BlackSwan
     end
 
     get "/books" do
+      redirect to("/reading")
+    end
+
+    get "/reading" do
       @title = "Books"
 
       @books = DB[:events].filter(type: "goodreads").
