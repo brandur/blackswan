@@ -3,6 +3,7 @@ module BlackSwan::Spiders
     def run
       check_config!
       update
+      update_content
     end
 
     private
@@ -68,6 +69,26 @@ module BlackSwan::Spiders
         end
       # we hit the final page, this is expected
       rescue Excon::Errors::NotFound
+      end
+    end
+
+    def update_content
+      without_content = DB[:events].
+        filter(type: "readability").
+        filter("NOT exist(metadata, 'content')")
+      without_content.each_with_index do |event, i|
+        res = Excon.get(
+          "https://www.readability.com/api/rest/v1/articles/#{event[:slug]}",
+          expects: 200,
+          query: oauth_params
+        )
+        article = MultiJson.decode(res.body)
+        DB.run <<-eos
+UPDATE events
+SET metadata = metadata || hstore('content', #{DB.literal(article["content"])})
+WHERE slug = #{DB.literal(event[:slug])}
+        eos
+        puts "processed=#{i + 1} slug=#{event[:slug]}"
       end
     end
   end
