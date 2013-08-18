@@ -5,6 +5,7 @@ module BlackSwan
     get "/events", provides: :json do
       @events = DB[:events].order(:occurred_at)
       @events = @events.filter(type: params[:type]) if params[:type]
+      @events = @events.limit(params[:limit]) if params[:limit]
 
       content_type(:json)
       MultiJson.encode(@events.map { |event|
