@@ -3,7 +3,12 @@ require "time"
 module BlackSwan
   class API < Sinatra::Base
     get "/events", provides: :json do
-      @events = DB[:events].order(:occurred_at)
+      @events = DB[:events]
+      @events = if params[:order] == "desc"
+        @events.reverse_order(:occurred_at)
+      else
+        @events.order(:occurred_at)
+      end
       @events = @events.filter(type: params[:type]) if params[:type]
       @events = @events.limit(params[:limit]) if params[:limit]
 
