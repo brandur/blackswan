@@ -10,6 +10,7 @@ module BlackSwan
       MultiJson.encode(@events.map { |event|
         {
           content:     event[:content],
+          metadata:    event[:metadata],
           occurred_at: event[:occurred_at].iso8601,
           slug:        event[:slug],
           type:        event[:type],
