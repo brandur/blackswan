@@ -9,10 +9,14 @@ module BlackSwan::Spiders
     private
 
     def check_config!
-      raise("missing=READABILITY_ACCESS_TOKEN") unless ENV["READABILITY_ACCESS_TOKEN"]
-      raise("missing=READABILITY_ACCESS_TOKEN_SECRET") unless ENV["READABILITY_ACCESS_TOKEN_SECRET"]
-      raise("missing=READABILITY_OAUTH_KEY") unless ENV["READABILITY_OAUTH_KEY"]
-      raise("missing=READABILITY_OAUTH_SECRET") unless ENV["READABILITY_OAUTH_SECRET"]
+      raise("missing=READABILITY_ACCESS_TOKEN") \
+        unless ENV["READABILITY_ACCESS_TOKEN"]
+      raise("missing=READABILITY_ACCESS_TOKEN_SECRET") \
+        unless ENV["READABILITY_ACCESS_TOKEN_SECRET"]
+      raise("missing=READABILITY_OAUTH_KEY") \
+        unless ENV["READABILITY_OAUTH_KEY"]
+      raise("missing=READABILITY_OAUTH_SECRET") \
+        unless ENV["READABILITY_OAUTH_SECRET"]
     end
 
     def oauth_params
