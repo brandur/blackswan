@@ -12,6 +12,7 @@ DB = Sequel.connect(BlackSwan::Config.database_url)
 
 spiders = []
 spiders << BlackSwan::Spiders::Blog        if ENV["BLOG_URL"]
+spiders << BlackSwan::Spiders::Flickr      if ENV["FLICKR_API_KEY"]
 spiders << BlackSwan::Spiders::Goodreads   if ENV["GOODREADS_ID"]
 spiders << BlackSwan::Spiders::Readability if ENV["READABILITY_ACCESS_TOKEN"]
 spiders << BlackSwan::Spiders::Twitter     if ENV["TWITTER_HANDLE"]

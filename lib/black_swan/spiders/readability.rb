@@ -77,6 +77,7 @@ module BlackSwan::Spiders
     end
 
     def update_content
+      puts "updating_content"
       without_content = DB[:events].
         filter(type: "readability").
         filter("NOT exist(metadata, 'content')")

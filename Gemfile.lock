@@ -23,6 +23,7 @@ GEM
     excon (0.16.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    flickraw (0.9.6)
     hike (1.2.1)
     libxml-ruby (2.3.3)
     multi_json (1.6.1)
@@ -79,6 +80,7 @@ DEPENDENCIES
   coffee-script
   debugger
   excon
+  flickraw
   libxml-ruby
   multi_json
   pg
