@@ -26,7 +26,7 @@ module BlackSwan::Spiders
     def process_page(options={})
       new = 0
       events = flickr.people.getPublicPhotos(
-        extras:   "description,date_upload,tags,url_m,url_sq",
+        extras:   "description,date_taken,date_upload,tags,url_m,url_sq",
         page:     options[:page],
         per_page: 500,
         user_id:  @user_id,
@@ -40,7 +40,7 @@ module BlackSwan::Spiders
         new += 1
 
         DB[:events].insert(
-          occurred_at:     Time.at(event["dateupload"].to_i),
+          occurred_at:     Time.at(event["datetaken"].to_i),
           slug:            event["id"],
           type:            "flickr",
           metadata: {
