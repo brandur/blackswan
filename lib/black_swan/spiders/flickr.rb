@@ -40,7 +40,7 @@ module BlackSwan::Spiders
         new += 1
 
         DB[:events].insert(
-          occurred_at:     Time.at(event["datetaken"].to_i),
+          occurred_at:     Time.at(event["date_taken"].to_i),
           slug:            event["id"],
           type:            "flickr",
           metadata: {
