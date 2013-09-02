@@ -26,7 +26,7 @@ module BlackSwan::Spiders
     def process_page(options={})
       new = 0
       events = flickr.people.getPublicPhotos(
-        extras:   "description,date_taken,date_upload,tags,url_m,url_sq",
+        extras:   "description,date_taken,date_upload,tags,url_l,url_m,url_sq",
         page:     options[:page],
         per_page: 500,
         user_id:  @user_id,
@@ -45,6 +45,9 @@ module BlackSwan::Spiders
           type:            "flickr",
           metadata: {
             description:   event["description"],
+            large_image:   event["url_l"],
+            large_height:  event["height_l"],
+            large_width:   event["width_l"],
             medium_image:  event["url_m"],
             medium_height: event["height_m"],
             medium_width:  event["width_m"],
