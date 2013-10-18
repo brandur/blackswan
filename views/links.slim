@@ -1,0 +1,31 @@
+.row
+  .col_12.last
+    h1 Href
+    /== render :slim, :"charts/_twitter", layout: false
+.row
+  #sections.col_1
+    ul
+      - @links_by_year_and_month.each do |year, links_by_month|
+        li
+          a href="#year_#{year}"= year
+          ul
+            - links_by_month.each do |month, link|
+              li
+                a href="#month_#{year}_#{month}"= month_name(month)
+  #links.col_11.last
+    - @links_by_year_and_month.each do |year, links_by_month|
+      h2 id="year_#{year}"= year
+      .links_year
+        - links_by_month.each do |month, links|
+          / no top margin for the first month in each year
+          - extra = month == links_by_month.keys.first ? 'top' : ''
+          h3 id="month_#{year}_#{month}" class="#{extra}"= month_name(month)
+          ul
+            - links.each do |link|
+              li
+                a href="#{link[:content]}" rel="nofollow"= link[:metadata][:title]
+                | &nbsp;
+                span.meta
+                  = URI.parse(link[:content]).host.gsub(/^www\./, '')
+                  | &nbsp;
+                  = link[:occurred_at].getlocal.strftime('%b %e, %Y')

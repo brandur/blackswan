@@ -5,9 +5,10 @@ module BlackSwan
     run Sinatra::Router.new {
       mount API
       mount Assets
-      mount Goodreads  # /books
-      mount Twitter    # /twitter
-      run   Default    # / + error handlers
+      mount Goodreads # /books
+      mount Links     # /readability
+      mount Twitter   # /twitter
+      run   Default   # / + error handlers
     }
   end
 end

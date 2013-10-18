@@ -15,6 +15,7 @@ require_relative "black_swan/api"
 require_relative "black_swan/assets"
 require_relative "black_swan/default"
 require_relative "black_swan/goodreads"
+require_relative "black_swan/links"
 require_relative "black_swan/twitter"
 
 # main
