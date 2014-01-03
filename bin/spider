@@ -15,11 +15,17 @@ spiders << BlackSwan::Spiders::Blog        if ENV["BLOG_URL"]
 spiders << BlackSwan::Spiders::Flickr      if ENV["FLICKR_API_KEY"]
 spiders << BlackSwan::Spiders::Goodreads   if ENV["GOODREADS_ID"]
 spiders << BlackSwan::Spiders::Readability if ENV["READABILITY_ACCESS_TOKEN"]
+spiders << BlackSwan::Spiders::Strava      if ENV["STRAVA_ACCESS_TOKEN"]
 spiders << BlackSwan::Spiders::Twitter     if ENV["TWITTER_HANDLE"]
 
 spiders.each do |spider|
-  Timeout.timeout(60) do
-    puts "running=#{spider.name}"
-    spider.new.run
+  begin
+    Timeout.timeout(60) do
+      puts "running=#{spider.name}"
+      spider.new.run
+    end
+  rescue => e
+    puts e.message
+    puts e.backtrace
   end
 end
