@@ -59,6 +59,7 @@ module BlackSwan::Spiders
             location_city:  event["location_city"],
             location_state: event["location_state"],
             moving_time:    event["moving_time"],
+            type:           event["type"],
           }.hstore)
       end
 
