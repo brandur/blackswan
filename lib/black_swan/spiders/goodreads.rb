@@ -30,19 +30,20 @@ module BlackSwan::Spiders
       parser = XML::Parser.string(res.body)
       doc = parser.parse
       doc.find("//reviews/review").each do |x|
-        isbn = x.find('book/isbn13').first.content
-        next if DB[:events].first(slug: isbn, type: "goodreads") != nil
+        id = x.find('book/id').first.content
+        next if DB[:events].first(slug: id, type: "goodreads") != nil
         new += 1
 
         DB[:events].insert(
           occurred_at:
             (Time.parse(x.find('read_at').first.content) rescue Time.at(0)),
-          slug:        isbn,
+          slug:        id,
           type:        "goodreads",
           metadata: {
             author:    x.find('book/authors/author').map { |a|
               a.find('name').first.content.strip
             }.join(", "),
+            isbn:      x.find('book/isbn13').first.content,
             num_pages: x.find('book/num_pages').first.content,
             rating:    x.find('rating').first.content,
             title:     x.find('book/title').first.content.strip,

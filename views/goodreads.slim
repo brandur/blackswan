@@ -23,13 +23,17 @@
           - books.each do |book|
             li
               em
-                a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{book[:slug]}"= book[:metadata][:title]
+                - if !book[:metadata][:isbn].empty?
+                  a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{book[:metadata][:isbn]}"= book[:metadata][:title]
+                - else
+                  = book[:metadata][:title]
               |  by #{book[:metadata][:author]}
               = ' '
-              span.meta 
+              span.meta
                 | #{book[:metadata][:num_pages]} pages; 
-                | ISBN13: 
-                a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{book[:slug]}"= format_isbn13(book[:slug])
-                | ; 
+                - if !book[:metadata][:isbn].empty?
+                  | ISBN13: 
+                  a href="http://www.google.com/search?tbo=p&tbm=bks&q=isbn:#{book[:metadata][:isbn]}"= format_isbn13(book[:metadata][:isbn])
+                  | ; 
                 - display = distance_of_time_in_words(book[:occurred_at])
                 = display ? "finished #{display} ago" : book[:occurred_at].getlocal.strftime('%b %e, %Y %H:%M')
