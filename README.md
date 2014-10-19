@@ -12,6 +12,7 @@ Local:
 ```
 createdb black-swan-development
 sequel -m db/migrate postgres://localhost/black-swan-development
+export $(cat .env)
 bin/spider
 foreman start
 # navigate to localhost:5000
