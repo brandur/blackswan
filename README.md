@@ -12,7 +12,7 @@ Local:
 ```
 bundle install
 createdb black-swan-development
-sequel -m db/migrate postgres://localhost/black-swan-development
+bundle exec sequel -m db/migrate postgres://localhost/black-swan-development
 export $(cat .env)
 bin/spider
 foreman start
