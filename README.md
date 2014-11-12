@@ -10,6 +10,7 @@ See an example at https://brandur-org-black-swan.herokuapp.com.
 Local:
 
 ```
+bundle install
 createdb black-swan-development
 sequel -m db/migrate postgres://localhost/black-swan-development
 export $(cat .env)
