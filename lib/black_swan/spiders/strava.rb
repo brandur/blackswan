@@ -18,7 +18,7 @@ module BlackSwan::Spiders
         new, events = process_page(before: earliest)
         puts "processed=#{new} earliest=#{earliest}"
         earliest = events.count > 0 ?
-          events.min_by { |e| e["occurred_at"] }["occurred_at"] :
+          Time.parse(events.min_by { |e| e["start_date"] }["start_date"]) :
           nil
       end while new > 0
     end
@@ -74,7 +74,7 @@ module BlackSwan::Spiders
         new, events = process_page(after: latest)
         puts "processed=#{new} latest=#{latest}"
         latest = events.count > 0 ?
-          events.max_by { |e| e["occurred_at"] }["occurred_at"] :
+          Time.parse(events.max_by { |e| e["start_date"] }["start_date"]) :
           nil
       end while new > 0
     end
