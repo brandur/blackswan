@@ -10,7 +10,7 @@ module BlackSwan::Spiders
 
     def backfill
       puts "backfilling"
-      earliest = DB[:events].filter(type: "twitter").min("slug::bigint".lit)
+      earliest = DB[:events].filter(type: "twitter").min(Sequel.lit("slug::bigint"))
       begin
         new, events = process_page(max_id: earliest)
         puts "processed=#{new} earliest=#{earliest}"
@@ -63,9 +63,9 @@ module BlackSwan::Spiders
           occurred_at: event["created_at"],
           slug:        event["id"].to_s,
           type:        "twitter",
-          metadata: {
+          metadata: Sequel.hstore({
             reply:     (event["text"] =~ /^\s*@/) != nil,
-          }.hstore)
+          }))
       end
 
       [new, events]
@@ -73,7 +73,7 @@ module BlackSwan::Spiders
 
     def update
       puts "updating"
-      latest = DB[:events].filter(type: "twitter").max("slug::bigint".lit)
+      latest = DB[:events].filter(type: "twitter").max(Sequel.lit("slug::bigint"))
       begin
         new, events = process_page(since_id: latest)
         puts "processed=#{new} latest=#{latest}"

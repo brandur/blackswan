@@ -20,7 +20,7 @@ spiders << BlackSwan::Spiders::Twitter     if ENV["TWITTER_HANDLE"]
 
 spiders.each do |spider|
   begin
-    Timeout.timeout(60) do
+    Timeout.timeout(300) do
       puts "running=#{spider.name}"
       spider.new.run
     end

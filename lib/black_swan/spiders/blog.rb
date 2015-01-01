@@ -28,9 +28,9 @@ module BlackSwan::Spiders
           occurred_at: Time.parse(item.published.to_s),
           slug:        item.link.href,
           type:        "blog",
-          metadata: {
+          metadata: Sequel.hstore({
             body: item.content,
-          }.hstore)
+          }))
       end
       puts "processed=#{new} latest=#{last ? last.link.href : nil}"
     end

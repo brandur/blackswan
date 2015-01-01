@@ -39,7 +39,7 @@ module BlackSwan::Spiders
             (Time.parse(x.find('read_at').first.content) rescue Time.at(0)),
           slug:        id,
           type:        "goodreads",
-          metadata: {
+          metadata: Sequel.hstore({
             author:    x.find('book/authors/author').map { |a|
               a.find('name').first.content.strip
             }.join(", "),
@@ -47,7 +47,7 @@ module BlackSwan::Spiders
             num_pages: x.find('book/num_pages').first.content,
             rating:    x.find('rating').first.content,
             title:     x.find('book/title').first.content.strip,
-          }.hstore)
+          }))
       end
       new
     end

@@ -43,7 +43,7 @@ module BlackSwan::Spiders
           occurred_at:     Time.parse(event["datetaken"]),
           slug:            event["id"],
           type:            "flickr",
-          metadata: {
+          metadata: Sequel.hstore({
             description:   event["description"],
             large_image:   event["url_l"],
             large_height:  event["height_l"],
@@ -55,7 +55,7 @@ module BlackSwan::Spiders
             square_height: event["height_sq"],
             square_width:  event["width_sq"],
             title:         event["title"],
-          }.hstore)
+          }))
       end
 
       [new, events]

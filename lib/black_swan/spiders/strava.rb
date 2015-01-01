@@ -4,7 +4,7 @@ module BlackSwan::Spiders
   class Strava
     def run
       check_config!
-      latest = DB[:events].filter(type: "strava").max("occurred_at".lit)
+      latest = DB[:events].filter(type: "strava").max(Sequel.lit("occurred_at"))
       update(latest) if latest
       backfill if !latest
     end
@@ -52,15 +52,17 @@ module BlackSwan::Spiders
           occurred_at: Time.parse(event["start_date"]),
           slug:        event["id"].to_s,
           type:        "strava",
-          metadata: {
-            calories:       event["calories"],
-            distance:       event["distance"],
-            elapsed_time:   event["elapsed_time"],
-            location_city:  event["location_city"],
-            location_state: event["location_state"],
-            moving_time:    event["moving_time"],
-            type:           event["type"],
-          }.hstore)
+          metadata: Sequel.hstore({
+            calories:          event["calories"],
+            distance:          event["distance"],
+            elapsed_time:      event["elapsed_time"],
+            location_city:     event["location_city"],
+            location_state:    event["location_state"],
+            occurred_at_local: event["start_date_local"],
+            moving_time:       event["moving_time"],
+            time_zone:         event["time_zone"],
+            type:              event["type"],
+          }))
       end
 
       [new, events]

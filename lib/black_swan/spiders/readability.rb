@@ -51,10 +51,10 @@ module BlackSwan::Spiders
           occurred_at:  Time.parse(event["date_added"]),
           slug:         event["article"]["id"],
           type:         "readability",
-          metadata: {
+          metadata: Sequel.hstore({
             title:      event["article"]["title"],
             word_count: event["article"]["word_count"],
-          }.hstore)
+          }))
       end
 
       [new, events]
