@@ -9,6 +9,7 @@ require_relative "black_swan/spiders/flickr"
 require_relative "black_swan/spiders/goodreads"
 require_relative "black_swan/spiders/readability"
 require_relative "black_swan/spiders/strava"
+require_relative "black_swan/spiders/trip_it"
 require_relative "black_swan/spiders/twitter"
 
 # modules
