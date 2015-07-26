@@ -10,7 +10,7 @@ GEM
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     eventmachine (1.0.4)
-    excon (0.42.1)
+    excon (0.45.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     flickraw (0.9.8)
