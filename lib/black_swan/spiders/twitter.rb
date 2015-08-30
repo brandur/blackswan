@@ -64,7 +64,7 @@ module BlackSwan::Spiders
           slug:        event["id"].to_s,
           type:        "twitter",
           metadata: Sequel.hstore({
-            reply:     (event["text"] =~ /^\s*@/) != nil,
+            reply:     (event["text"] =~ /\A\s*@/) != nil,
           }))
       end
 
