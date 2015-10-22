@@ -53,15 +53,16 @@ module BlackSwan::Spiders
           slug:        event["id"].to_s,
           type:        "strava",
           metadata: Sequel.hstore({
-            calories:          event["calories"],
-            distance:          event["distance"],
-            elapsed_time:      event["elapsed_time"],
-            location_city:     event["location_city"],
-            location_state:    event["location_state"],
-            occurred_at_local: event["start_date_local"],
-            moving_time:       event["moving_time"],
-            time_zone:         event["time_zone"],
-            type:              event["type"],
+            calories:             event["calories"],
+            distance:             event["distance"],
+            elapsed_time:         event["elapsed_time"],
+            location_city:        event["location_city"],
+            location_state:       event["location_state"],
+            occurred_at_local:    event["start_date_local"],
+            moving_time:          event["moving_time"],
+            time_zone:            event["time_zone"],
+            total_elevation_gain: event["total_elevation_gain"],
+            type:                 event["type"],
           }))
       end
 
