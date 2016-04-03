@@ -18,9 +18,8 @@ GEM
     libxml-ruby (2.7.0)
     multi_json (1.10.1)
     pg (0.17.1)
-    puma (2.10.2)
-      rack (>= 1.1, < 2.0)
-    rack (1.6.0)
+    puma (3.2.0)
+    rack (1.6.4)
     rack-instruments (0.2.2)
       slides (~> 0.2.0)
     rack-protection (1.5.3)
@@ -88,3 +87,6 @@ DEPENDENCIES
   sprockets
   webmock
   yui-compressor
+
+BUNDLED WITH
+   1.11.2
