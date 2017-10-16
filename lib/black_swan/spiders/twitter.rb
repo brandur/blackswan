@@ -24,7 +24,7 @@ module BlackSwan::Spiders
     end
 
     def expand_urls(event)
-      content = event["text"]
+      content = event["full_text"]
       # axe Twitter's crappy shortlinks
       if event["entities"]
         event["entities"]["urls"].each do |url|
@@ -51,6 +51,7 @@ module BlackSwan::Spiders
           screen_name:      ENV["TWITTER_HANDLE"],
           since_id:         options[:since_id],
           trim_user:        "true",
+          tweet_mode:       "extended",
         }.reject { |k, v| v == nil })
       events = MultiJson.decode(res.body)
       events.each do |event|
@@ -64,7 +65,7 @@ module BlackSwan::Spiders
           slug:        event["id"].to_s,
           type:        "twitter",
           metadata: Sequel.hstore({
-            reply:     (event["text"] =~ /\A\s*@/) != nil,
+            reply:     (event["full_text"] =~ /\A\s*@/) != nil,
           }))
       end
 
