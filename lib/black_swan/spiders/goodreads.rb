@@ -17,7 +17,7 @@ module BlackSwan::Spiders
     def process_page(options={})
       new = 0
       res = Excon.get(
-        "http://www.goodreads.com/review/list/#{ENV["GOODREADS_ID"]}.xml",
+        "https://www.goodreads.com/review/list/#{ENV["GOODREADS_ID"]}.xml",
         expects: 200,
         query: {
           key:      ENV["GOODREADS_KEY"],
