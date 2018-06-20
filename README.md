@@ -13,9 +13,10 @@ Local:
 bundle install
 createdb black-swan-development
 bundle exec sequel -m db/migrate postgres://localhost/black-swan-development
+mv .env.sample .env
 export $(cat .env)
 bin/spider
-foreman start
+forego start
 # navigate to localhost:5000
 ```
 
