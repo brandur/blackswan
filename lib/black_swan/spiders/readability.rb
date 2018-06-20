@@ -80,7 +80,7 @@ module BlackSwan::Spiders
       puts "updating_content"
       without_content = DB[:events].
         filter(type: "readability").
-        filter("NOT exist(metadata, 'content')")
+        filter(Sequel.lit("NOT exist(metadata, 'content')"))
       without_content.each_with_index do |event, i|
         res = Excon.get(
           "https://www.readability.com/api/rest/v1/articles/#{event[:slug]}",

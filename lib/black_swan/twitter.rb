@@ -17,10 +17,10 @@ module BlackSwan
       last_modified(@tweets.first[:occurred_at])
 
       @tweet_count              = @tweets.
-        filter("metadata -> 'reply' = 'false'").count
+        filter(Sequel.lit("metadata -> 'reply' = 'false'")).count
       @tweet_count_with_replies = @tweets.count
 
-      @tweets = @tweets.filter("metadata -> 'reply' = 'false'") \
+      @tweets = @tweets.filter(Sequel.lit("metadata -> 'reply' = 'false'")) \
         if params[:with_replies] != "true"
       @tweets = @tweets.all
 
