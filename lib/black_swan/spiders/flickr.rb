@@ -26,7 +26,7 @@ module BlackSwan::Spiders
     def process_page(options={})
       new = 0
       events = flickr.people.getPublicPhotos(
-        extras:   "description,date_taken,date_upload,tags,url_l,url_m,url_sq",
+        extras:   "description,date_taken,date_upload,tags,url_l,url_m,url_sq,url_o",
         page:     options[:page],
         per_page: 500,
         user_id:  @user_id,
@@ -44,17 +44,20 @@ module BlackSwan::Spiders
           slug:            event["id"],
           type:            "flickr",
           metadata: Sequel.hstore({
-            description:   event["description"],
-            large_image:   event["url_l"],
-            large_height:  event["height_l"],
-            large_width:   event["width_l"],
-            medium_image:  event["url_m"],
-            medium_height: event["height_m"],
-            medium_width:  event["width_m"],
-            square_image:  event["url_sq"],
-            square_height: event["height_sq"],
-            square_width:  event["width_sq"],
-            title:         event["title"],
+            description:     event["description"],
+            large_image:     event["url_l"],
+            large_height:    event["height_l"],
+            large_width:     event["width_l"],
+            medium_image:    event["url_m"],
+            medium_height:   event["height_m"],
+            medium_width:    event["width_m"],
+            original_image:  event["url_o"],
+            original_height: event["height_o"],
+            original_width:  event["width_o"],
+            square_image:    event["url_sq"],
+            square_height:   event["height_sq"],
+            square_width:    event["width_sq"],
+            title:           event["title"],
           }))
       end
 
