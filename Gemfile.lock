@@ -26,7 +26,7 @@ GEM
     multi_json (1.13.1)
     mustermann (1.0.2)
     pg (0.17.1)
-    puma (3.2.0)
+    puma (3.12.3)
     rack (2.0.5)
     rack-instruments (0.2.2)
       slides (~> 0.2.0)
