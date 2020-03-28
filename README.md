@@ -10,13 +10,15 @@ See an example at https://brandur-org-black-swan.herokuapp.com.
 Local:
 
 ```
+brew install direnv
 bundle install
 createdb black-swan-development
 bundle exec sequel -m db/migrate postgres://localhost/black-swan-development
-mv .env.sample .env
-export $(cat .env)
+cp .envrc.sample .envrc
+direnv allow
 bin/spider
-forego start
+bundle exec puma --quiet --threads 8:32 --port 5000 config.ru
+
 # navigate to localhost:5000
 ```
 

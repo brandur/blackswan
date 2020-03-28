@@ -1,0 +1,10 @@
+export BLOG_URL=
+export DATABASE_URL=postgres://localhost/black-swan-development
+export FLICKR_API_KEY=
+export FLICKR_EMAIL=
+export FLICKR_SHARED_SECRET=
+export GOODREADS_ID=
+export GOODREADS_KEY=
+export STRAVA_ACCESS_TOKEN=
+export TWITTER_ACCESS_TOKEN=
+export TWITTER_HANDLE=
