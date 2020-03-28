@@ -15,7 +15,7 @@ GEM
     concurrent-ruby (1.0.5)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
-    excon (0.45.4)
+    excon (0.71.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
     flickraw (0.9.8)
