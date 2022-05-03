@@ -2,7 +2,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.6)
-    backports (3.17.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -25,7 +24,7 @@ GEM
     rack (2.2.2)
     rack-instruments (0.2.2)
       slides (~> 0.2.0)
-    rack-protection (2.0.8.1)
+    rack-protection (2.2.0)
       rack
     rack-ssl (1.4.1)
       rack
@@ -35,7 +34,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rr (1.0.4)
-    ruby2_keywords (0.0.2)
+    ruby2_keywords (0.0.5)
     safe_yaml (1.0.4)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -43,17 +42,16 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     sequel (5.30.0)
-    sinatra (2.0.8.1)
+    sinatra (2.2.0)
       mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
+      rack (~> 2.2)
+      rack-protection (= 2.2.0)
       tilt (~> 2.0)
-    sinatra-contrib (2.0.8.1)
-      backports (>= 2.8.2)
+    sinatra-contrib (2.2.0)
       multi_json
       mustermann (~> 1.0)
-      rack-protection (= 2.0.8.1)
-      sinatra (= 2.0.8.1)
+      rack-protection (= 2.2.0)
+      sinatra (= 2.2.0)
       tilt (~> 2.0)
     sinatra-router (0.2.4)
       sinatra (>= 1.4, < 3.0)
