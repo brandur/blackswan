@@ -1,7 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.3.6)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     backports (3.17.0)
     coffee-script (2.4.1)
       coffee-script-source
@@ -20,6 +21,7 @@ GEM
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.2)
     pg (1.2.3)
+    public_suffix (5.0.0)
     puma (4.3.3)
       nio4r (~> 2.0)
     rack (2.2.2)
